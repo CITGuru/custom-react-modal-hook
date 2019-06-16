@@ -1,24 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useModal } from './hooks'
+import CustomModal from './modal'
+import UserInformation from './components/UserInformation'
+
+
+const data = [
+  {name:"Oyetoke Toby", age:20, job_title:"Software Engineer", country:"Nigeria", gender:"male"},
+  {name:"Apata Dorcas", age:21, job_title:"Makeup Stylist", country:"Nigeria", gender:"female"},
+  {name:"Jonh Doe", age:22, job_title:"Graphic Designer", country:"US", gender:"male"},
+  {name:"Leke Oyetoke", age:30, job_title:"IT Manager", country:"Nigeria", gender:"male"},
+]
 
 function App() {
+  const [itemModalOpen, setItemModalOpen, toggleModal] = useModal()
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={toggleModal}>Show Modal</button>
+      <CustomModal
+          title="Item Modal"
+          isActive={itemModalOpen}
+          handleClose={() => setItemModalOpen(false)}
+      >
+        <h2>Hey Modal</h2>       
+      </CustomModal>
+      <UserInformation data={data} />
     </div>
   );
 }
